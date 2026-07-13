@@ -11,6 +11,8 @@
 > 6-stage delivery pipeline, agent memory, and review protocols — extracted
 > from a real production system that shipped 200+ releases this way.
 
+![The Claude Code agent team — nine robot agents carrying a software delivery pipeline with commit checkpoints: an orange team-lead directs, blue builders work in parallel, a teal QA inspector reviews with a magnifier, violet reviewers hold checklists](assets/hero-banner.svg)
+
 A production-proven playbook for multi-agent software development in Claude
 Code: 9 specialized sub-agents working as one coordinated AI dev team. A
 team-lead orchestrator drives backend, frontend, QA, integration,
@@ -83,13 +85,13 @@ iron rule: **only the orchestrator touches git.** Full mechanics:
 
 ## What you get
 
-| Asset | Where | What it is |
-| :--- | :--- | :--- |
-| **The playbook** | [`playbook/`](playbook/) | 9 chapters: pipeline, roles, protocols, bug patterns, phantom checks, memory, routines, field notes |
-| **9 agent templates** (+1 optional) | [`agents/`](agents/) | Claude Code sub-agent files, fully parameterized — copy, find-replace, run |
-| **Standing review routines** | [`prompts/`](prompts/) | Daily code review, recurring-pattern sweep, 4-surface security sweep — schedule and forget |
-| **Templates** | [`templates/`](templates/) | CLAUDE.md constitution + generator meta-prompt, agent memory, API contract, PR bodies, permissions, CI |
-| **A complete worked example** | [`examples/laravel-react/`](examples/laravel-react/) | Every generic file made concrete for a Laravel 12 API + React SPA monorepo — including the authentic Arabic production review prompts |
+| | Asset | Where | What it is |
+| :---: | :--- | :--- | :--- |
+| <img src="assets/icons/playbook.svg" width="44" alt="playbook icon"> | **The playbook** | [`playbook/`](playbook/) | 9 chapters: pipeline, roles, protocols, bug patterns, phantom checks, memory, routines, field notes |
+| <img src="assets/icons/agents.svg" width="44" alt="agents icon"> | **9 agent templates** (+1 optional) | [`agents/`](agents/) | Claude Code sub-agent files, fully parameterized — copy, find-replace, run |
+| <img src="assets/icons/prompts.svg" width="44" alt="prompts icon"> | **Standing review routines** | [`prompts/`](prompts/) | Daily code review, recurring-pattern sweep, 4-surface security sweep — schedule and forget |
+| <img src="assets/icons/templates.svg" width="44" alt="templates icon"> | **Templates** | [`templates/`](templates/) | CLAUDE.md constitution + generator meta-prompt, agent memory, API contract, PR bodies, permissions, CI |
+| <img src="assets/icons/examples.svg" width="44" alt="worked example icon"> | **A complete worked example** | [`examples/laravel-react/`](examples/laravel-react/) | Every generic file made concrete for a Laravel 12 API + React SPA monorepo — including the authentic Arabic production review prompts |
 
 ## How is this different from other agent repos?
 

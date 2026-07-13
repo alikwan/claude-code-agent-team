@@ -38,3 +38,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Repository self-CI: sensitive-token sweep, placeholder-registry consistency,
   markdown lint, EN/AR parity, agent frontmatter lint, link checker, and
   release consistency checks.
+- Visual identity (AI-generated vector art, Recraft V4.1 via Higgsfield, with
+  provenance signatures retained): logo mark, hero banner, five component
+  icons, and a bilingual social-preview card composited locally.

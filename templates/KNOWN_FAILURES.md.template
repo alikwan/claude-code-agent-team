@@ -1,0 +1,36 @@
+<!--
+  KNOWN_FAILURES.md.template — the pre-existing test-failure ledger.
+  Lives at the repo root (or tests/KNOWN_FAILURES.md). QA diffs new failures
+  against this ledger instead of re-deriving "is this mine?" every cycle.
+-->
+
+# Known Test Failures
+
+Failures listed here are **pre-existing — NOT regressions**. During
+Stage 3 — Review, `qa-engineer` compares any failing test against this table:
+listed and unchanged → note it and move on; not listed → it is new, and it
+blocks (`QA REJECTED ❌` with a `[TEST FAILURE]` finding).
+
+| Test | First seen | Last verified commit | Owner | Status | Notes |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `ReportExportTest::test_pdf_render` | 2026-02-03 | `abc1234` | *(unassigned)* | open | Missing PDF binary on clean checkouts; env issue, not code |
+| `LegacyImportTest::test_batch_resume` | 2026-03-18 | `def5678` | test-engineer | in progress | Ordering assumption broken by index change |
+
+## Rules
+
+1. **Provenance is mandatory.** Every entry records the commit at which the
+   failure was last verified to pre-exist. "It was always broken" without a
+   SHA is not evidence — a claimed pre-existing failure that can't be
+   reproduced at its recorded commit is treated as new.
+2. **QA diffs, it does not re-derive.** The ledger is the single source of
+   truth for what is already broken; QA sessions must not spend cycles
+   re-investigating listed entries (and must not silently expand the list —
+   adding an entry requires demonstrating the failure on `{{MAIN_BRANCH}}`
+   without the current change).
+3. **The optional `test-engineer` agent owns burning this list down.** In the
+   base team nobody owns accumulated test debt; if this ledger grows instead
+   of shrinking, add the agent (see `agents/optional/test-engineer.md`).
+4. **Stale entries escalate.** An entry older than **3 months** with no owner
+   is an escalation to the user: either assign an owner, delete the test, or
+   accept the failure explicitly in writing. Ledgers that only grow become
+   noise, and noise is how real regressions slip through.

@@ -1,0 +1,42 @@
+<!--
+  pipeline-state.md.template — per-task pipeline state file.
+  Maintained by the orchestrator; updated at every stage transition.
+  Suggested location: .claude/pipeline-state/<task-name>.md
+  Protocol: playbook/03-communication-protocol.md, section 7.
+-->
+
+# Pipeline State — <task name>
+
+```markdown
+task: <name>
+branch: feature/<name>
+stage: 4-integrate                # 1-plan | 1.5-design | 2-build | 3-review |
+                                  # 4-integrate | 5-version-document | 6-release
+updated: <YYYY-MM-DD HH:MM>
+checkpoints:
+  A: <sha>                        # feat(scope): ...      — after Stage 2 — Build
+  B: <sha or ->                   # fix(scope): ...       — only if QA required fixes
+  C: <sha or ->                   # chore(scope): ...     — only if integration modified files
+  D: <sha or ->                   # docs: ... + VERSION   — after Stage 5 — Version & Document
+verdicts:
+  qa: QA APPROVED ✅ (cycles: 2)
+  security: SECURITY REVIEW: APPROVED ✅ | N/A
+  migration: MIGRATION REVIEW: APPROVED ✅ | N/A
+  integration: INTEGRATION COMPLETE ✅ (changes: <none | file count>)
+  documentation: <pending | DOCUMENTATION AUDIT: COMPLETE ✅>
+gates:
+  gate-1-plan: approved <date>
+  gate-2-version: <pending | vX.Y.Z approved <date>>
+next: integration-agent spawned, awaiting report
+```
+
+## Resume protocol
+
+A fresh session (after a crash, context exhaustion, or an interruption):
+
+1. Reads this file, then `git log --oneline` on the branch to confirm the
+   recorded checkpoint SHAs exist and nothing was committed after them.
+2. Resumes at the **recorded stage** — exactly where `next:` points.
+3. **Never re-runs approved stages.** A recorded `QA APPROVED ✅` stands; the
+   only thing that invalidates a verdict is a new commit touching its scope
+   (which the git log comparison in step 1 reveals).

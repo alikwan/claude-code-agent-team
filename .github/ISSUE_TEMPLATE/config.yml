@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: ❓ Questions & Help
+    url: https://github.com/alikwan/claude-code-agent-team/discussions/categories/q-a
+    about: Ask how to adapt the pipeline to your stack, or anything else — use Discussions, not issues.
+  - name: 🏆 Show and tell
+    url: https://github.com/alikwan/claude-code-agent-team/discussions/categories/show-and-tell
+    about: Adopted the pipeline? Share what you built and how it went.

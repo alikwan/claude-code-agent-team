@@ -1,0 +1,57 @@
+<!--
+  MEMORY.md.template — per-agent persistent memory.
+  One copy per agent at .claude/agent-memory/<agent-name>/MEMORY.md.
+  Commit memory files with the code they were learned from.
+  Full protocol: playbook/06-memory-system.md.
+-->
+
+# Agent Memory — <agent-name>
+
+**Rules (binding):**
+
+- Read this file at the **start** of every session, before any other work.
+- Append new entries **after** the work is done, in the same session.
+- Hard cap: **~200 lines — ENFORCED.** When close, condense or move detail
+  into topic files in this directory (e.g. `flaky-tests.md`) and link them.
+- Date every entry (`YYYY-MM-DD`).
+- **NEVER record secrets**, credentials, tokens, or personal data. Memory
+  files are committed to the repository.
+
+---
+
+## Recurring Issues to Always Check
+
+<!-- Things that have bitten more than once. Check proactively every session. -->
+
+- 2026-01-15: Settings stored in the DB arrive as strings — a toggle read as
+  `"1"` fails a strict `=== 1` check. Verify type handling on every new
+  setting read; this has caused two separate silent-feature-off bugs.
+
+## Known Weak Spots
+
+<!-- Fragile areas of the codebase that deserve extra scrutiny — and known
+     failures that must not be mistaken for regressions. -->
+
+- 2026-02-03: `ReportExportTest::test_pdf_render` fails on a clean checkout —
+  **pre-existing failure, NOT a regression** (first seen at commit `abc1234`,
+  before any pipeline work in this area). Do not block QA on it; tracked in
+  `KNOWN_FAILURES.md`.
+
+## Approved Exceptions
+
+<!-- Deliberate deviations from project rules that the user explicitly
+     approved. Cite when and in what context, so no reviewer re-flags them. -->
+
+- 2026-03-10: The legacy exports controller keeps raw SQL (perf-critical
+  query; the ORM equivalent measured ~40× slower). Approved by the user during
+  the reporting-rebuild plan review. Do not flag again.
+
+## Disproven Findings
+
+<!-- Findings a reviewer raised that investigation proved wrong. Record these:
+     they prevent every future session from re-raising — and re-investigating —
+     the same false positive. A disproven finding is as valuable as a bug. -->
+
+- 2026-04-02: "Missing index on `payments.contract_id`" — disproven: the
+  column is the leading key of the composite `(contract_id, paid_at)` index,
+  and the planner uses it (verified with EXPLAIN). Do not re-raise.

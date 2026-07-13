@@ -1,0 +1,49 @@
+name: 🧪 Adaptation report
+description: "You used this pipeline on your own project — tell us how it went (good or bad)."
+title: "[adaptation] "
+labels: ["adaptation-report"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        These reports are the most valuable feedback this repository receives.
+        Honest negative reports are just as welcome as success stories — both
+        improve the playbook. Outstanding adaptations may be invited to become
+        a new `examples/<stack>/` directory.
+  - type: input
+    id: stack
+    attributes:
+      label: Your stack
+      placeholder: e.g. Django + Next.js, Rails + Hotwire, Go + SvelteKit
+    validations:
+      required: true
+  - type: input
+    id: scale
+    attributes:
+      label: Project scale
+      placeholder: e.g. solo dev, ~40k LOC, 2 years old
+    validations:
+      required: false
+  - type: textarea
+    id: what-worked
+    attributes:
+      label: What worked
+    validations:
+      required: true
+  - type: textarea
+    id: what-broke
+    attributes:
+      label: What broke or needed changing
+      description: Which agents, rules, or pipeline stages did not survive contact with your project?
+    validations:
+      required: true
+  - type: dropdown
+    id: example-pr
+    attributes:
+      label: Would you be interested in contributing your adaptation as an examples/ directory?
+      options:
+        - "Yes"
+        - "Maybe — tell me what's involved"
+        - "No"
+    validations:
+      required: false

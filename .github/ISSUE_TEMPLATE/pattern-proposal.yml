@@ -1,0 +1,45 @@
+name: 🔍 Propose a bug pattern or phantom check
+description: Propose a new recurring-bug pattern (playbook/04) or phantom-feature check (playbook/05).
+title: "[pattern] "
+labels: ["pattern-proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The pattern library only stays useful if every entry is backed by evidence.
+        Every pattern in the playbook today earned its place by causing real review
+        blockers in a production codebase — proposals are held to the same bar.
+  - type: textarea
+    id: pattern
+    attributes:
+      label: The pattern
+      description: What is the failure mode? When does it happen, and why do tests/reviews usually miss it?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence from a real codebase (required)
+      description: >
+        Describe at least one real occurrence: what was built, what silently broke,
+        how it was discovered. Sanitize any private details — the story matters,
+        not the identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: detection
+    attributes:
+      label: Detection recipe
+      description: How would a QA or integration agent detect this mechanically? (grep recipe, review step, test strategy)
+    validations:
+      required: true
+  - type: dropdown
+    id: target
+    attributes:
+      label: Where does it belong?
+      options:
+        - playbook/04-bug-patterns.md (diff-level correctness pattern)
+        - playbook/05-phantom-checks.md (system-wiring check)
+        - Not sure
+    validations:
+      required: true

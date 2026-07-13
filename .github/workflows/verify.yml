@@ -1,0 +1,154 @@
+# Repository self-verification — this playbook dogfoods its own QA philosophy.
+#
+# Injection-safety note: no job in this file interpolates untrusted event input
+# (issue titles, PR bodies, branch names) into run: commands. Keep it that way.
+#
+# NOTE on the secret sweep: the *specific* private-token sweep used before initial
+# publication cannot live here (publishing the deny-list would itself disclose the
+# tokens). This public job checks GENERIC leak patterns instead, which is the right
+# guard for contributor PRs that might paste content from their own private systems.
+name: verify
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  secret-patterns:
+    name: Generic secret/leak patterns
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Scan for generic leak patterns
+        run: |
+          set -euo pipefail
+          fail=0
+
+          echo "--- absolute home paths (/Users/*, /home/*) ---"
+          if grep -rnE '/(Users|home)/[a-z0-9_-]+/' \
+               --include='*.md' --include='*.yml' --include='*.yaml' --include='*.json' \
+               --exclude-dir=.git --exclude-dir=.github . ; then
+            fail=1
+          fi
+
+          echo "--- credential-looking assignments ---"
+          # password/secret/token/api_key followed by a literal value (not a {{PLACEHOLDER}},
+          # not an env reference, not a descriptive sentence).
+          if grep -rniE "(password|passwd|secret|api[_-]?key|auth[_-]?token)[\"']?\s*[:=]\s*[\"'][A-Za-z0-9@#%^&*+!?_-]{8,}[\"']" \
+               --include='*.md' --include='*.yml' --include='*.yaml' --include='*.json' \
+               --exclude-dir=.git --exclude-dir=.github . \
+               | grep -vE '\{\{[A-Z_]+\}\}|your-|example|<[a-z-]+>|CHANGE_ME' ; then
+            fail=1
+          fi
+
+          echo "--- personal email addresses ---"
+          if grep -rnE '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}' \
+               --include='*.md' --exclude-dir=.git --exclude-dir=.github . \
+               | grep -vE 'example\.(com|org)|your-|contributor-covenant|noreply|users@|\{\{' ; then
+            fail=1
+          fi
+
+          if [ "$fail" -ne 0 ]; then
+            echo "::error::Potential private data found — see matches above. If a match is a false positive, adjust the pattern allowlist in verify.yml with justification."
+            exit 1
+          fi
+          echo "clean ✔"
+
+  placeholder-registry:
+    name: Placeholder registry consistency
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Every used placeholder is registered; examples/ has none
+        run: |
+          set -euo pipefail
+
+          # Tokens registered in docs/placeholders.md
+          grep -oE '\{\{[A-Z][A-Z0-9_]*\}\}' docs/placeholders.md | sort -u > /tmp/registered.txt
+          echo "registered: $(wc -l < /tmp/registered.txt)"
+
+          # Tokens used across parameterized dirs
+          grep -rhoE '\{\{[A-Z][A-Z0-9_]*\}\}' agents/ prompts/ templates/ playbook/ docs/getting-started.md 2>/dev/null \
+            | sort -u > /tmp/used.txt
+          echo "used: $(wc -l < /tmp/used.txt)"
+
+          unregistered=$(comm -23 /tmp/used.txt /tmp/registered.txt || true)
+          if [ -n "$unregistered" ]; then
+            echo "::error::Unregistered placeholders found (add them to docs/placeholders.md):"
+            echo "$unregistered"
+            exit 1
+          fi
+
+          # examples/ must be placeholder-free except the explicit mapping table in its README
+          leaks=$(grep -rnE '\{\{[A-Z][A-Z0-9_]*\}\}' examples/ --include='*.md' \
+                   | grep -v 'examples/laravel-react/README.md' || true)
+          if [ -n "$leaks" ]; then
+            echo "::error::examples/ must contain concrete values, not placeholders:"
+            echo "$leaks"
+            exit 1
+          fi
+          echo "consistent ✔"
+
+  agent-frontmatter:
+    name: Agent template frontmatter lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate YAML frontmatter of every agent file
+        run: |
+          set -euo pipefail
+          fail=0
+          for f in $(find agents examples/*/agents -name '*.md' -not -name 'README.md'); do
+            if ! head -1 "$f" | grep -q '^---$'; then
+              echo "::error file=$f::missing YAML frontmatter opening '---'"; fail=1; continue
+            fi
+            fm=$(awk '/^---$/{n++; next} n==1{print} n>=2{exit}' "$f")
+            for key in name description tools; do
+              if ! echo "$fm" | grep -qE "^${key}:"; then
+                echo "::error file=$f::frontmatter missing required key '${key}:'"; fail=1
+              fi
+            done
+            if echo "$fm" | grep -qE '^model:\s*claude-[a-z0-9.-]+$'; then
+              echo "::error file=$f::model is pinned to a specific model ID — use a tier placeholder or omit (models rot)"; fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "valid ✔" || exit 1
+
+  en-ar-parity:
+    name: EN/AR twin existence parity
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Twinned files must exist in both languages
+        run: |
+          set -euo pipefail
+          fail=0
+          check() {
+            [ -f "$1" ] || { echo "::error::missing $1"; fail=1; }
+          }
+          check "README.md";                 check "README.ar.md"
+          check "docs/getting-started.md";   check "docs/ar/getting-started.ar.md"
+          check "docs/case-study.md";        check "docs/ar/case-study.ar.md"
+          check "docs/ar/playbook-overview.ar.md"
+          # Every Arabic file must carry a translated-from reference header
+          for ar in README.ar.md docs/ar/*.ar.md; do
+            if ! head -6 "$ar" | grep -qiE 'translated from|مُترجَم من'; then
+              echo "::error file=$ar::missing translated-from reference header (drift must be auditable)"; fail=1
+            fi
+          done
+          [ "$fail" -eq 0 ] && echo "parity ✔" || exit 1
+
+  markdownlint:
+    name: Markdown lint (relaxed)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: DavidAnson/markdownlint-cli2-action@v19
+        with:
+          globs: |
+            **/*.md
+            !examples/**/prompts/*.ar.md

@@ -1,0 +1,31 @@
+# Release consistency: the git tag, the VERSION file, and the top CHANGELOG heading
+# must all agree — the same invariant the playbook's documentation agent enforces.
+#
+# Injection-safety note: GITHUB_REF_NAME is consumed as an environment variable,
+# never interpolated into the script text.
+name: release-check
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: read
+
+jobs:
+  consistency:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: tag == VERSION == CHANGELOG heading
+        run: |
+          set -euo pipefail
+          tag="${GITHUB_REF_NAME#v}"
+          version="$(tr -d '[:space:]' < VERSION)"
+          changelog="$(grep -m1 -oE '^## \[[0-9]+\.[0-9]+\.[0-9]+\]' CHANGELOG.md | tr -d '#[] ')"
+          echo "tag=$tag version=$version changelog=$changelog"
+          if [ "$tag" != "$version" ] || [ "$tag" != "$changelog" ]; then
+            echo "::error::Release mismatch — tag v$tag, VERSION $version, CHANGELOG $changelog must be identical."
+            exit 1
+          fi
+          echo "consistent ✔"

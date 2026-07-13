@@ -1,0 +1,36 @@
+name: 📄 Documentation bug
+description: A broken link, a wrong instruction, a template error, or inconsistent terminology.
+title: "[docs] "
+labels: ["docs-bug"]
+body:
+  - type: input
+    id: location
+    attributes:
+      label: File and section
+      description: Path of the file and the heading or line where the problem is.
+      placeholder: playbook/01-pipeline.md — "Stage 3"
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong?
+      description: Quote the incorrect text or describe the broken behavior (e.g., a command that fails as written).
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should it say or do instead?
+    validations:
+      required: false
+  - type: dropdown
+    id: language
+    attributes:
+      label: Affected language version
+      options:
+        - English
+        - Arabic (العربية)
+        - Both
+    validations:
+      required: true

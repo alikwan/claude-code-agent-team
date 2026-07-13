@@ -1,0 +1,11 @@
+{
+  // Relaxed config — docs repos die of lint fatigue. Only structural rules kept.
+  "default": true,
+  "MD013": false, // line length — prose wraps naturally
+  "MD033": false, // inline HTML — needed for <div dir="rtl"> and collapsed sections
+  "MD041": false, // first line heading — READMEs open with a language-switch link
+  "MD024": { "siblings_only": true }, // duplicate headings OK across sections (bilingual)
+  "MD036": false, // emphasis-as-heading — used deliberately in report format blocks
+  "MD040": false, // fenced code language — report-format blocks are plain text
+  "MD045": false  // images without alt handled case-by-case
+}

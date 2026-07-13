@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 400" role="img" aria-labelledby="title desc">
+  <title id="title">Claude Code multi-agent team 6-stage development pipeline diagram</title>
+  <desc id="desc">A team-lead orchestrator drives six stages: Plan, optional Design, parallel Build by backend and frontend agents, Review by QA with conditional security and migration reviewers, Integrate, Version and Document, then Release. Two human approval gates and four commit checkpoints A to D.</desc>
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
+    </marker>
+  </defs>
+  <style>
+    .stage { fill:#1e293b; stroke:#334155; stroke-width:1.5; rx:10; }
+    .agent { fill:#2563eb; }
+    .agentAlt { fill:#0f766e; }
+    .agentCond { fill:#7c3aed; }
+    .gate { fill:#d97757; }
+    .h { font:600 15px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#f8fafc; }
+    .t { font:500 12.5px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#f8fafc; }
+    .s { font:400 11px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#cbd5e1; }
+    .cp { font:600 11px ui-monospace,'SF Mono',Menlo,monospace; fill:#fbbf24; }
+    .flow { stroke:#64748b; stroke-width:2; fill:none; marker-end:url(#arr); }
+  </style>
+
+  <rect x="0" y="0" width="1080" height="400" fill="#0f172a" rx="14"/>
+
+  <!-- Orchestrator bar -->
+  <rect x="30" y="24" width="1020" height="46" rx="10" fill="#1e293b" stroke="#d97757" stroke-width="1.5"/>
+  <text x="540" y="46" text-anchor="middle" class="h">team-lead — the orchestrator (your main session)</text>
+  <text x="540" y="62" text-anchor="middle" class="s">plans · spawns every agent · owns ALL git · commits at checkpoints A–D · opens the PR</text>
+
+  <!-- Stage 1 -->
+  <g>
+    <rect x="30" y="110" width="150" height="150" class="stage" rx="10"/>
+    <text x="105" y="134" text-anchor="middle" class="h">1 · Plan</text>
+    <text x="105" y="156" text-anchor="middle" class="s">read constitution</text>
+    <text x="105" y="172" text-anchor="middle" class="s">define API contract</text>
+    <rect x="45" y="188" width="120" height="30" rx="8" class="gate"/>
+    <text x="105" y="207" text-anchor="middle" class="t">🧍 Gate 1 · plan</text>
+    <text x="105" y="240" text-anchor="middle" class="s">branch created</text>
+  </g>
+
+  <!-- Stage 2 -->
+  <g>
+    <rect x="210" y="110" width="160" height="150" class="stage" rx="10"/>
+    <text x="290" y="134" text-anchor="middle" class="h">2 · Build (parallel)</text>
+    <rect x="225" y="148" width="130" height="30" rx="8" class="agent"/>
+    <text x="290" y="167" text-anchor="middle" class="t">backend-dev</text>
+    <rect x="225" y="186" width="130" height="30" rx="8" class="agent"/>
+    <text x="290" y="205" text-anchor="middle" class="t">frontend-dev</text>
+    <text x="290" y="240" text-anchor="middle" class="s">shared API contract</text>
+    <text x="290" y="286" text-anchor="middle" class="cp">📌 A · feat(scope)</text>
+  </g>
+
+  <!-- Stage 3 -->
+  <g>
+    <rect x="400" y="110" width="170" height="150" class="stage" rx="10"/>
+    <text x="485" y="134" text-anchor="middle" class="h">3 · Review</text>
+    <rect x="415" y="146" width="140" height="28" rx="8" class="agentAlt"/>
+    <text x="485" y="164" text-anchor="middle" class="t">qa-engineer 🔒</text>
+    <rect x="415" y="180" width="140" height="26" rx="8" class="agentCond"/>
+    <text x="485" y="197" text-anchor="middle" class="t">security-reviewer*</text>
+    <rect x="415" y="212" width="140" height="26" rx="8" class="agentCond"/>
+    <text x="485" y="229" text-anchor="middle" class="t">migration-reviewer*</text>
+    <text x="485" y="250" text-anchor="middle" class="s">* conditional, parallel</text>
+    <text x="485" y="286" text-anchor="middle" class="cp">📌 B · fix(scope)</text>
+  </g>
+
+  <!-- Stage 4 -->
+  <g>
+    <rect x="600" y="110" width="150" height="150" class="stage" rx="10"/>
+    <text x="675" y="134" text-anchor="middle" class="h">4 · Integrate</text>
+    <rect x="615" y="148" width="120" height="30" rx="8" class="agent"/>
+    <text x="675" y="167" text-anchor="middle" class="t">integration</text>
+    <text x="675" y="196" text-anchor="middle" class="s">phantom checks</text>
+    <text x="675" y="212" text-anchor="middle" class="s">connect, not rebuild</text>
+    <text x="675" y="228" text-anchor="middle" class="s">Δ → QA re-check</text>
+    <text x="675" y="286" text-anchor="middle" class="cp">📌 C · chore(scope)</text>
+  </g>
+
+  <!-- Stage 5 -->
+  <g>
+    <rect x="780" y="110" width="160" height="150" class="stage" rx="10"/>
+    <text x="860" y="134" text-anchor="middle" class="h">5 · Version + Docs</text>
+    <rect x="795" y="146" width="130" height="28" rx="8" class="gate"/>
+    <text x="860" y="164" text-anchor="middle" class="t">🧍 Gate 2: version</text>
+    <rect x="795" y="182" width="130" height="28" rx="8" class="agent"/>
+    <text x="860" y="200" text-anchor="middle" class="t">documentation</text>
+    <text x="860" y="228" text-anchor="middle" class="s">CHANGELOG always</text>
+    <text x="860" y="286" text-anchor="middle" class="cp">📌 D · docs + bump</text>
+  </g>
+
+  <!-- Stage 6 -->
+  <g>
+    <rect x="970" y="110" width="80" height="150" class="stage" rx="10"/>
+    <text x="1010" y="134" text-anchor="middle" class="h">6</text>
+    <text x="1010" y="152" text-anchor="middle" class="h">Release</text>
+    <text x="1010" y="186" text-anchor="middle" class="s">push</text>
+    <text x="1010" y="202" text-anchor="middle" class="s">open PR</text>
+  </g>
+
+  <!-- flow arrows -->
+  <path class="flow" d="M180,185 L206,185"/>
+  <path class="flow" d="M370,185 L396,185"/>
+  <path class="flow" d="M570,185 L596,185"/>
+  <path class="flow" d="M750,185 L776,185"/>
+  <path class="flow" d="M940,185 L966,185"/>
+
+  <!-- QA reject loop -->
+  <path class="flow" d="M485,260 C485,330 290,330 290,264" stroke-dasharray="5 4"/>
+  <text x="388" y="322" text-anchor="middle" class="s">QA REJECTED ❌ → fix → re-review</text>
+
+  <!-- legend -->
+  <g>
+    <rect x="30" y="352" width="14" height="14" rx="4" class="agent"/>
+    <text x="52" y="364" class="s">builder / connector (read-write)</text>
+    <rect x="270" y="352" width="14" height="14" rx="4" class="agentAlt"/>
+    <text x="292" y="364" class="s">judge (read-only)</text>
+    <rect x="430" y="352" width="14" height="14" rx="4" class="agentCond"/>
+    <text x="452" y="364" class="s">conditional reviewer (cheap model)</text>
+    <rect x="690" y="352" width="14" height="14" rx="4" class="gate"/>
+    <text x="712" y="364" class="s">human approval gate</text>
+    <text x="880" y="364" class="cp">📌 commit checkpoint</text>
+  </g>
+</svg>

@@ -1,0 +1,98 @@
+# templates/ci/tests.yml.template
+#
+# Full test suite on every PR — the CI backstop of the full-suite invariant.
+# If {{FULL_SUITE_POLICY}} is `targeted-only`, QA runs only targeted tests
+# in-pipeline, which is safe ONLY because this workflow runs the COMPLETE
+# suite on every PR before merge (docs/placeholders.md). Delete this workflow
+# and you must switch the policy to `full-suite-allowed`.
+#
+# Copy to .github/workflows/tests.yml (drop the .template suffix), replace the
+# placeholders, and adapt the runtime-setup steps to your stack.
+#
+# CREDENTIALS: every value below is either a CI-secret reference or an obvious
+# throwaway scoped to the job's ephemeral service containers. Never put real
+# credentials in this file — use ${{ secrets.* }} for anything that matters.
+
+name: Tests
+
+on:
+  pull_request:
+    branches: ["{{MAIN_BRANCH}}"]
+  push:
+    branches: ["{{MAIN_BRANCH}}", "{{PRODUCTION_BRANCH}}"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    # ── Service containers — uncomment what your stack needs ──────────────
+    services:
+      # database:                                  # MySQL variant
+      #   image: mysql:8.0
+      #   env:
+      #     MYSQL_ROOT_PASSWORD: ci_throwaway_root
+      #     MYSQL_DATABASE: "{{TEST_DB_NAME}}"
+      #     MYSQL_USER: ci_user
+      #     MYSQL_PASSWORD: ci_throwaway_password
+      #   ports:
+      #     - 3306:3306
+      #   options: >-
+      #     --health-cmd="mysqladmin ping"
+      #     --health-interval=10s --health-timeout=5s --health-retries=3
+
+      # database:                                  # PostgreSQL variant
+      #   image: postgres:16
+      #   env:
+      #     POSTGRES_DB: "{{TEST_DB_NAME}}"
+      #     POSTGRES_USER: ci_user
+      #     POSTGRES_PASSWORD: ci_throwaway_password
+      #   ports:
+      #     - 5432:5432
+      #   options: >-
+      #     --health-cmd="pg_isready"
+      #     --health-interval=10s --health-timeout=5s --health-retries=3
+
+      # cache:                                     # Redis (cache/queue)
+      #   image: redis:7-alpine
+      #   ports:
+      #     - 6379:6379
+      #   options: >-
+      #     --health-cmd="redis-cli ping"
+      #     --health-interval=10s --health-timeout=5s --health-retries=3
+      {}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # ── Runtime setup — replace with your stack's setup action ──────────
+      # PHP:    uses: shivammathur/setup-php@v2   (with php-version + extensions)
+      # Node:   uses: actions/setup-node@v4       (with node-version + cache)
+      # Python: uses: actions/setup-python@v5     (with python-version + cache)
+      - name: Set up runtime
+        run: echo "replace with your stack's setup action"
+
+      - name: Install dependencies
+        run: echo "replace with composer install / npm ci / pip install -r ..."
+        env:
+          # Private-registry auth, if any — always a secret reference:
+          REGISTRY_AUTH: ${{ secrets.REGISTRY_AUTH }}
+
+      - name: Prepare application
+        # e.g. copy .env.example, generate an app key, run migrations against
+        # the service container. Point ALL connection env vars at the
+        # ephemeral services above — never at a real environment.
+        run: echo "replace with your prepare + migrate steps"
+        env:
+          DB_DATABASE: "{{TEST_DB_NAME}}"
+          DB_USERNAME: ci_user
+          DB_PASSWORD: ci_throwaway_password
+
+      - name: Run backend tests (full suite)
+        run: "{{TEST_COMMAND}}"
+        env:
+          DB_DATABASE: "{{TEST_DB_NAME}}"
+          DB_USERNAME: ci_user
+          DB_PASSWORD: ci_throwaway_password
+
+      - name: Run frontend tests
+        run: "{{FRONTEND_TEST_COMMAND}}"

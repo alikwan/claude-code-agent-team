@@ -1,0 +1,226 @@
+<!--
+  CLAUDE.md.template — skeleton project constitution for the agent pipeline.
+
+  How to use:
+    1. Copy this file to your repository root as CLAUDE.md.
+    2. Replace every placeholder token using the registry in docs/placeholders.md.
+    3. Replace every guidance comment (like this one) with your project's real
+       content, then delete the comment.
+
+  Prefer automation? templates/generate-your-claude-md.md is a prompt that
+  makes Claude Code explore your repository and emit a filled-in version of
+  this file, then verify it.
+-->
+
+# CLAUDE.md — {{PROJECT_NAME}} Developer Reference
+
+> This file is the **single source of truth** for any developer or AI agent
+> working on this repository. Read it completely before writing any code.
+
+{{PROJECT_NAME}} is {{PROJECT_DESCRIPTION}}.
+
+<!-- guidance: add one or two sentences of identity — who uses the system and
+     what a broken release costs. Agents calibrate their caution from this.
+     Keep the whole constitution lean; move deep reference material into docs/
+     and link it. A constitution nobody finishes reading governs nothing. -->
+
+---
+
+## 1. Project Philosophy
+
+<!-- guidance: 3–5 non-negotiable principles that settle arguments before they
+     start. Every architectural decision should trace back to one of them.
+     Write your own — the rows below are common archetypes, not defaults.
+     Delete any that do not genuinely bind your project. -->
+
+| Principle | Meaning in practice |
+| :--- | :--- |
+| **{{PRIMARY_LANGUAGE}}-first** | All user-facing text, activity logs, and notifications are in {{PRIMARY_LANGUAGE}}. Code, comments, and developer docs are in English. |
+| **Security-first** | Every new endpoint ships with authentication middleware, an authorization check, and input validation. No exceptions. |
+| **Real-time by default** | User-facing state changes are pushed to clients immediately; polling is a last resort. |
+
+## 2. Tech Stack
+
+| Layer | Technology |
+| :--- | :--- |
+| Backend | {{BACKEND_STACK}} — lives in `{{BACKEND_DIR}}/` |
+| Frontend | {{FRONTEND_STACK}} — lives in `{{FRONTEND_DIR}}/` |
+| Database | <!-- e.g. PostgreSQL 16 --> |
+| Cache / queue | <!-- e.g. Redis + your background-worker system --> |
+| Testing | <!-- backend + frontend test runners --> |
+| CI | <!-- e.g. GitHub Actions (see .github/workflows/tests.yml) --> |
+| Infrastructure | <!-- where this deploys --> |
+
+## 3. Development Commands
+
+<!-- guidance: every command below must be copy-paste runnable from the repo
+     root. If dev runs inside a container, bake the prefix in — agents execute
+     these lines verbatim and do not improvise. -->
+
+```bash
+# Backend tests (targeted runs: append {{TEST_FILTER_FLAG}}<TestName>)
+{{DEV_COMMAND_PREFIX}} {{TEST_COMMAND}}
+
+# Frontend tests
+{{FRONTEND_TEST_COMMAND}}
+
+# Lint / format
+{{DEV_COMMAND_PREFIX}} {{LINT_COMMAND}}
+{{FRONTEND_LINT_COMMAND}}
+
+# Frontend production build
+{{BUILD_COMMAND}}
+
+# Clear framework caches (run after config/route changes)
+{{CACHE_CLEAR_COMMAND}}
+
+# Restart background workers so they load new code (run after changing job code)
+{{QUEUE_RESTART_COMMAND}}
+```
+
+**Test policy:** `{{FULL_SUITE_POLICY}}`.
+<!-- guidance: `targeted-only` is safe ONLY if CI runs the complete suite on
+     every PR (see templates/ci/tests.yml.template). No CI backstop → set
+     `full-suite-allowed` so QA runs everything in-pipeline. -->
+
+**Database safety:** the only database any agent may ever reset, wipe, or
+fresh-migrate is `{{TEST_DB_NAME}}`. Every other database is off-limits — this
+rule is repeated in every agent spawn prompt and enforced in
+`.claude/settings.json`.
+
+## 4. Architecture Overview
+
+<!-- guidance: a map, not a novel. For each domain module: where it lives,
+     what it owns (routes, jobs, events, services), and its one-line purpose.
+     Then a table of key services (name → responsibility) and a table of
+     runtime channels/queues if you have them. Aim for what a new hire needs
+     on day one; link deep dives in docs/3_Developer_Docs/. -->
+
+## 5. Git Workflow (MANDATORY)
+
+**Step 1 — always check your current branch:** `git branch --show-current`
+
+**Step 2 — branch rules:**
+
+| Branch | Rule |
+| :--- | :--- |
+| `{{PRODUCTION_BRANCH}}` | **NEVER commit directly.** Represents production. |
+| `{{MAIN_BRANCH}}` | **NEVER commit directly.** Integration branch; all PRs target it. |
+| `feature/*`, `hotfix/*` | Working branches. Always branch from `{{MAIN_BRANCH}}`. |
+
+```bash
+git checkout {{MAIN_BRANCH}} && git pull origin {{MAIN_BRANCH}}
+git checkout -b feature/<name>
+```
+
+**Step 3 — commit format (Conventional Commits):**
+
+| Type | When to use |
+| :--- | :--- |
+| `feat:` | New feature |
+| `fix:` | Bug fix |
+| `docs:` | Documentation only |
+| `refactor:` | Code restructuring, no behavior change |
+| `chore:` | Maintenance, dependencies, wiring |
+| `security:` | Security fix (custom type — makes security history greppable) |
+
+**Step 4 — commit & push after every unit of work.** Never leave finished work
+uncommitted or parked in a `git stash` — a stash is for short-lived context
+switches only, never a place to park deliverables. Include
+`.claude/agent-memory/` updates in the same commit as the code they were
+learned from: agent memory is part of the deliverable. A task is **not done**
+until its changes are committed and pushed.
+
+> **NEVER force-push unless the user explicitly requests it.**
+
+## 6. The Agent Pipeline (MANDATORY)
+
+> **Analyze first.** Any change beyond a trivial single-line fix goes through
+> the agent pipeline. Do not write code, edit files, or open PRs outside it —
+> that skips QA, integration checks, and documentation, all of which are
+> blocking stages.
+
+The entry point is always `team-lead`, run as the **main session**
+(`claude --agent team-lead`) — never spawned via the Task tool, because
+sub-agents cannot spawn sub-agents. It reads this file, presents a plan, waits
+for explicit approval (Gate 1), then drives the stages, pausing once more for
+version approval (Gate 2, skippable via `{{AUTO_VERSION}}: true`).
+
+| Task type | Lane |
+| :--- | :--- |
+| New feature, module, page, refactor, non-trivial bug fix | Full pipeline (Stage 1 — Plan → Stage 6 — Release) |
+| UI/UX design or redesign | Full pipeline + Stage 1.5 — Design |
+| Small fix meeting **all** hotfix criteria | Hotfix lane (3 stages) |
+
+Pipeline flow: Stage 1 — Plan → (Stage 1.5 — Design) → Stage 2 — Build →
+Stage 3 — Review → Stage 4 — Integrate → Stage 5 — Version & Document →
+Stage 6 — Release, with commits at checkpoints A–D. Only the orchestrator
+runs `git`/`gh`.
+
+Agent definitions live in `.claude/agents/`. Full protocol: see the pipeline
+playbook your team adopted (pipeline v1.1).
+
+## 7. Code Style
+
+<!-- guidance: the binding subset only — naming-convention table (controllers,
+     models, services, migrations...), formatting standard (which the lint
+     command enforces mechanically), and the handful of rules with real
+     consequences: where business logic lives, where validation lives, how
+     money/dates/IDs are represented. Everything the linter can enforce should
+     not be re-litigated here. -->
+
+## 8. Documentation Governance
+
+Canonical docs live in a numbered tree:
+
+```
+docs/
+├── 1_Blueprints/        # System design documents
+├── 2_User_Guides/       # Feature-based user documentation
+├── 3_Developer_Docs/    # API reference, data dictionary, settings reference
+└── _archive/            # Historical reports and audits — read-only
+```
+
+Rules:
+
+- **No report files in the repository root.** Analyses and audits go to
+  `docs/_archive/` or nowhere.
+- **`CHANGELOG.md` is always required** — every release updates it, no
+  exceptions. The documentation stage blocks the PR otherwise.
+- Docs are feature-based, not report-based: update the guide for the feature
+  you changed rather than writing a new document about the change.
+
+**Doc-update map** — when you change X, update Y:
+
+| Change area | Doc file to update |
+| :--- | :--- |
+| <!-- e.g. Payments module --> | <!-- docs/2_User_Guides/... --> |
+| API changes | <!-- docs/3_Developer_Docs/API_Reference.md --> |
+| Database schema | <!-- docs/3_Developer_Docs/Data_Dictionary.md --> |
+| Any change | `CHANGELOG.md` (always) |
+
+## 9. Versioning
+
+Semantic versioning, tracked in a `VERSION` file at the repo root, with a
+[Keep a Changelog](https://keepachangelog.com/)-style `CHANGELOG.md`.
+
+| Change | Bump |
+| :--- | :--- |
+| Breaking change, schema migration with data impact | MAJOR |
+| New feature, new module | MINOR |
+| Bug fix, small improvement | PATCH |
+
+**On release:**
+
+1. Update the `VERSION` file (done at Checkpoint D, with the approved version).
+2. Update `CHANGELOG.md` under a `vX.Y.Z` heading matching `VERSION` exactly.
+3. After the PR merges: `git tag -a vX.Y.Z -m "Release vX.Y.Z"` and push the
+   tag. Tags are created only after merge, never on feature branches.
+
+<!--
+  VALIDATION: generated constitutions should be validated — every documented
+  command must actually run. Before committing this file, execute each command
+  in section 3 (use --help or a dry-run variant for destructive ones) and fix
+  any that fail. A constitution with broken commands teaches agents to ignore
+  the constitution.
+-->

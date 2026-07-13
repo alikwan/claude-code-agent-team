@@ -1,0 +1,67 @@
+# Claude Code Permission Settings
+
+> ⚠️ If `{{DEV_COMMAND_PREFIX}}` is empty in your project (native dev), remove
+> the leading space it leaves behind in the patterns below — a permission
+> pattern with a leading space never matches.
+
+Copy the JSON below into your project's `.claude/settings.json` (merge with
+any existing keys), then adapt the two stack-specific deny entries to your
+framework's destructive database commands. This is the **second enforcement**
+of the pipeline's safety rails — the spawn prompts state them in prose, the
+permission system makes them stick (prose alone has already failed once; see
+`playbook/08-field-notes.md`).
+
+What the rules encode:
+
+- **Deny — destructive DB commands.** Deny your stack's wipe/fresh-migrate
+  commands outright. Deny patterns cannot express "except `{{TEST_DB_NAME}}`",
+  so the one legitimate exception — resetting the test database — is granted
+  per-invocation through the interactive permission prompt, where a human sees
+  exactly which database is targeted. Do not "solve" this with a broad allow.
+- **Deny — git catastrophes.** Force-push, protected-branch deletion, and
+  hard resets. Only the orchestrator runs git at all, but a denied command is
+  cheaper than a restored branch.
+- **Deny — filesystem wipes** outside the workspace.
+- **Allow — the boring loop.** Tests, lint, and build run dozens of times per
+  pipeline; approving each run trains humans to click through prompts.
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "Bash({{DEV_COMMAND_PREFIX}} {{TEST_COMMAND}}:*)",
+      "Bash({{FRONTEND_TEST_COMMAND}}:*)",
+      "Bash({{DEV_COMMAND_PREFIX}} {{LINT_COMMAND}}:*)",
+      "Bash({{FRONTEND_LINT_COMMAND}}:*)",
+      "Bash({{BUILD_COMMAND}}:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)"
+    ],
+    "deny": [
+      "Bash(php artisan migrate:fresh:*)",
+      "Bash(php artisan db:wipe:*)",
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(git branch -D:*)",
+      "Bash(git branch -d {{MAIN_BRANCH}}:*)",
+      "Bash(git branch -d {{PRODUCTION_BRANCH}}:*)",
+      "Bash(git reset --hard:*)",
+      "Bash(rm -rf /:*)",
+      "Bash(rm -rf ~:*)",
+      "Bash(rm -rf ..:*)"
+    ]
+  }
+}
+```
+
+> The first two deny entries are the Laravel spelling of "wipe the database" —
+> replace them with your framework's equivalents *(see examples/laravel-react
+> for a concrete version)*.
+
+**A warning that earns its place:** do **not** let this file accumulate broad
+allowlists, and do not pair it with permission-skipping flags to make prompts
+go away. Every wildcard you add to `allow` is a rule nobody re-reviews, and
+"skip permissions, we trust the pipeline" is precisely how guardrails erode —
+one convenience at a time, until the deny list is the only thing left and then
+it isn't. Keep the allow list short, specific, and boring.

@@ -1,0 +1,59 @@
+# templates/ci/agent-pr-review.yml.template
+#
+# Automatic Claude Code review on every PR.
+#
+# How this complements (not replaces) the in-pipeline QA stage:
+#   - Stage 3 — Review runs BEFORE the PR exists, on committed checkpoint
+#     state, with project memory, the bug-pattern library, targeted tests, and
+#     an empirical check. It is the pipeline's quality gate.
+#   - This workflow reviews the FINAL assembled PR with fresh eyes and zero
+#     pipeline context — a different vantage point that catches what
+#     within-pipeline familiarity misses, and it also covers changes that
+#     never went through the pipeline at all (human hotfixes, dependency
+#     bumps, bot PRs).
+#   A finding here is an input to the human merger, not a pipeline verdict —
+#   it has no QA APPROVED ✅ / QA REJECTED ❌ authority.
+#
+# Required secret: CLAUDE_CODE_OAUTH_TOKEN (same as agent-mention.yml).
+#
+# Copy to .github/workflows/agent-pr-review.yml (drop the .template suffix).
+
+name: Claude Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, ready_for_review, reopened]
+    # Optional: only run when relevant files change
+    # paths:
+    #   - "{{BACKEND_DIR}}/**"
+    #   - "{{FRONTEND_DIR}}/**"
+
+jobs:
+  claude-review:
+    # Optional: restrict to certain authors (e.g. first-time contributors)
+    # if: github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+      issues: read
+      id-token: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          # Optional: allow reviews on PRs opened by trusted bot accounts;
+          # without this the action aborts on non-human actors.
+          # allowed_bots: '<bot-login>'
+          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
+          plugins: 'code-review@claude-code-plugins'
+          prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'

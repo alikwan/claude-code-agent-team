@@ -61,13 +61,13 @@ claude --agent team-lead   # the orchestrator IS your main session
 
 ## ماذا ستحصل عليه
 
-| | الأصل | المكان | ما هو |
-| :---: | :--- | :--- | :--- |
-| <img src="assets/icons/playbook.svg" width="44" alt="أيقونة الدليل المنهجي"> | **الدليل المنهجي (playbook)** | [`playbook/`](playbook/) (EN) — [نظرة عامة بالعربية](docs/ar/playbook-overview.ar.md) | 9 فصول: خط الأنابيب، الأدوار، البروتوكولات، أنماط الأخطاء، فحوص «الميزات الشبح»، الذاكرة، الروتينات الدورية، الملاحظات الميدانية |
-| <img src="assets/icons/agents.svg" width="44" alt="أيقونة الوكلاء"> | **قوالب 9 وكلاء (+1 اختياري)** | [`agents/`](agents/) (EN) | ملفات Sub-agents جاهزة لـ Claude Code، مُعامَلة بالكامل (parameterized) — انسخ، استبدل القيم، شغّل |
-| <img src="assets/icons/prompts.svg" width="44" alt="أيقونة البرومبتات"> | **روتينات مراجعة دورية** | [`prompts/`](prompts/) (EN) | مراجعة كود يومية، مسح للأنماط المتكررة، مسح أمني رباعي الأسطح — جدوِلها وانسَها |
-| <img src="assets/icons/templates.svg" width="44" alt="أيقونة القوالب"> | **قوالب** | [`templates/`](templates/) (EN) | دستور CLAUDE.md + الـ meta-prompt المولِّد له، ذاكرة الوكلاء، عقد الـ API، أجسام الـ PR، الأذونات، CI |
-| <img src="assets/icons/examples.svg" width="44" alt="أيقونة المثال التطبيقي"> | **مثال تطبيقي كامل** | [`examples/laravel-react/`](examples/laravel-react/) (EN) | كل ملف عام مُجسَّدًا لمستودع monorepo يجمع Laravel 12 API + React SPA — بما في ذلك prompts المراجعة الإنتاجية العربية الأصلية |
+| الأصل | المكان | ما هو |
+| :--- | :--- | :--- |
+| <img src="assets/icons/playbook.svg" width="26" alt=""> **الدليل المنهجي (playbook)** | [`playbook/`](playbook/) (EN) — [نظرة عامة بالعربية](docs/ar/playbook-overview.ar.md) | 9 فصول: خط الأنابيب، الأدوار، البروتوكولات، أنماط الأخطاء، فحوص «الميزات الشبح»، الذاكرة، الروتينات الدورية، الملاحظات الميدانية |
+| <img src="assets/icons/agents.svg" width="26" alt=""> **قوالب 9 وكلاء (+1 اختياري)** | [`agents/`](agents/) (EN) | ملفات Sub-agents جاهزة لـ Claude Code، مُعامَلة بالكامل (parameterized) — انسخ، استبدل القيم، شغّل |
+| <img src="assets/icons/prompts.svg" width="26" alt=""> **روتينات مراجعة دورية** | [`prompts/`](prompts/) (EN) | مراجعة كود يومية، مسح للأنماط المتكررة، مسح أمني رباعي الأسطح — جدوِلها وانسَها |
+| <img src="assets/icons/templates.svg" width="26" alt=""> **قوالب** | [`templates/`](templates/) (EN) | دستور CLAUDE.md + الـ meta-prompt المولِّد له، ذاكرة الوكلاء، عقد الـ API، أجسام الـ PR، الأذونات، CI |
+| <img src="assets/icons/examples.svg" width="26" alt=""> **مثال تطبيقي كامل** | [`examples/laravel-react/`](examples/laravel-react/) (EN) | كل ملف عام مُجسَّدًا لمستودع monorepo يجمع Laravel 12 API + React SPA — بما في ذلك prompts المراجعة الإنتاجية العربية الأصلية |
 
 ## بمَ يختلف هذا عن مستودعات الوكلاء الأخرى؟
 

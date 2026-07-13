@@ -6,8 +6,8 @@ see the disclaimer at the end.*
 
 ## The setup
 
-One developer. One large, real system: **the source project**, an Arabic-first debt
-collection platform — Laravel backend, SPA frontend, call-center telephony
+One developer. One large, real system — an Arabic-first debt
+collection platform (its name is deliberately withheld) — Laravel backend, SPA frontend, call-center telephony
 integrations, omnichannel messaging, automatic escalation workflows, legal
 case management, field-visit tracking, workforce management. RTL interfaces,
 Arabic notifications, exact-decimal money everywhere. The kind of system that
@@ -116,10 +116,10 @@ debt. If it ships one stuck project, it was worth publishing.
 
 ---
 
-*Sanitization disclaimer: "the source project" is used here as the project's codename.
-Client names, domains, hostnames, internal paths, credentials, vendor
-integrations that could identify the operation, and private issue/PR numbers
-have been removed or replaced throughout this repository. The worked example
+*Sanitization disclaimer: the source project is deliberately unnamed.
+Its name, client names, domains, hostnames, internal paths, credentials,
+vendor integrations that could identify the operation, and private issue/PR
+numbers have been removed or replaced throughout this repository. The worked example
 in [examples/laravel-react/](../examples/laravel-react/) uses a fictionalized
 project ("Acme Collect") on the author's current recommended stack; the
 original production system ran a different SPA frontend — the methodology

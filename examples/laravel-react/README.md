@@ -7,8 +7,8 @@ placeholder resolved to an actual value. If the playbook chapters are the
 theory, this directory is what a project looks like *after* adoption.
 
 > **Provenance & honesty note.** Adapted from the production methodology
-> artifacts of **the source project**, a real Arabic-first collections platform that
-> shipped 200+ releases through this pipeline.
+> artifacts of a real Arabic-first collections platform (deliberately
+> unnamed) that shipped 200+ releases through this pipeline.
 > Details that could identify the operator's clients or infrastructure were
 > removed or replaced; the frontend was converted to the author's current
 > recommended stack (React) — the original production system ran a different

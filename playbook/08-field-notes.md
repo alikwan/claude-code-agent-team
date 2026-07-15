@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 08 of 08
+
 # 08 — Field Notes
 
 Everything in this chapter cost us something. These are the incidents behind
@@ -155,3 +159,11 @@ that got enforced somewhere mechanical** — a permission file, a commit
 checkpoint, a CI job, a canonical string an orchestrator branches on. The
 rules that lived only in prose are the ones with incident stories attached.
 When you adapt this playbook, port the enforcement, not just the sentences.
+
+---
+
+<div align="center">
+
+[← 07 — Standing Routines](07-standing-routines.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [Getting started →](../docs/getting-started.md)
+
+</div>

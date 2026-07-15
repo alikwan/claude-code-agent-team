@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 00 of 08
+
 # 00 — Overview: The Operating Model
 
 This playbook turns a single Claude Code session into a coordinated software
@@ -102,3 +106,11 @@ frontend framework entirely — the agents carried over unchanged.
 > version-approval ordering bug, and an escalation-rule wording gap). Each fix
 > is marked where it appears, and [chapter 08](08-field-notes.md) tells the
 > stories honestly.
+
+---
+
+<div align="center">
+
+[Playbook index](README.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [01 — The Pipeline →](01-pipeline.md)
+
+</div>

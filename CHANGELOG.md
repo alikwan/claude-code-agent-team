@@ -5,6 +5,7 @@ All notable changes to this repository are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+> [!NOTE]
 > This file is itself an example of the changelog convention the playbook teaches
 > (see [templates/CLAUDE.md.template](templates/CLAUDE.md.template), Versioning section):
 > one heading per release, reverse-chronological, and every change ships with a
@@ -12,26 +13,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.0] — 2026-07-15
+
+### Changed
+
+- **Full documentation redesign.** Restructured README (EN + AR) with a centered
+  identity header, quick-nav links, GitHub alert callouts, and a consistent
+  footer; every section README (`playbook/`, `agents/`, `prompts/`,
+  `templates/`, `examples/`) now opens with its section icon and a breadcrumb
+  back to the root, and closes with cross-section navigation.
+- **New original visual identity**, hand-drawn as vector art in a single
+  palette (blue `#2563EB`, orange accent `#F97316`, slate neutrals): logo mark
+  (orchestrator-and-builders tree), typographic hero banner with an inline
+  6-stage pipeline strip, a redrawn pipeline diagram (stages, both human gates,
+  commit checkpoints A–D, hotfix-lane legend — bilingual labels), five section
+  icons, and a bilingual social-preview card. Replaces the AI-generated art
+  from 0.1.0.
+- `agents/README.md` gained a full team table (role, write access, model tier).
+- Docs pages (`docs/`, `playbook/` chapters) carry breadcrumb headers and
+  prev/next navigation footers.
+
 ## [0.1.1] — 2026-07-14
 
 ### Changed
 
-- The source production project is now fully unnamed throughout the
-  repository (case study, its Arabic twin, and the example's provenance
-  note), and its git history was rewritten to match — the experience
-  transfers; the project's identity does not.
-- Increased the worked example's fictional distance from its origin:
-  domain strings that were byte-identical to the source project (doc
-  filenames, a module path, service names, a setting key, table names)
-  were renamed to fiction-preserving equivalents.
+- The source production project is now fully unnamed throughout the repository
+  (case study, its Arabic twin, and the example's provenance note), and its git
+  history was rewritten to match — the experience transfers; the project's
+  identity does not.
+- Increased the worked example's fictional distance from its origin: domain
+  strings that were byte-identical to the source project (doc filenames, a
+  module path, service names, a setting key, table names) were renamed to
+  fiction-preserving equivalents.
 
 ### Fixed
 
-- SVG assets carry explicit intrinsic `width`/`height` again — without
-  them, GitHub READMEs collapse the images (icons rendered at 15px).
-- Component icons moved inline into the asset table's text cells — a
-  dedicated icon column gets crushed when GitHub shrinks an overflowing
-  table.
+- SVG assets carry explicit intrinsic `width`/`height` again — without them,
+  GitHub READMEs collapse the images (icons rendered at 15px).
+- Component icons moved inline into the asset table's text cells — a dedicated
+  icon column gets crushed when GitHub shrinks an overflowing table.
 
 ## [0.1.0] — 2026-07-13
 

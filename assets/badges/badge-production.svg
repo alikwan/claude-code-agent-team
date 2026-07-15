@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="175" height="20" viewBox="0 0 175 20" role="img" aria-label="production: 200+ releases">
+  <title>production: 200+ releases</title>
+  <defs>
+    <linearGradient id="g" x2="0" y2="100%"><stop offset="0" stop-color="#fff" stop-opacity=".12"></stop><stop offset="1" stop-opacity=".12"></stop></linearGradient>
+    <clipPath id="r"><rect width="175" height="20" rx="4" fill="#fff"></rect></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="77" height="20" fill="#475569"></rect>
+    <rect x="77" width="98" height="20" fill="#16A34A"></rect>
+    <rect width="175" height="20" fill="url(#g)"></rect>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Segoe UI, Verdana, Geneva, DejaVu Sans, sans-serif" font-size="11">
+    <text x="38.5" y="14.5" fill="#000" fill-opacity=".25">production</text>
+    <text x="38.5" y="13.5">production</text>
+    <text x="126" y="14.5" fill="#000" fill-opacity=".25">200+ releases</text>
+    <text x="126" y="13.5">200+ releases</text>
+  </g>
+</svg>

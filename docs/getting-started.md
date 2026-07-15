@@ -1,3 +1,5 @@
+[**← repository root**](../README.md) &nbsp;·&nbsp; `docs/`
+
 # Getting Started
 
 From zero to your first pipeline run. Prerequisites: [Claude Code](https://docs.anthropic.com/en/docs/claude-code)
@@ -126,3 +128,11 @@ agent file was probably edited — the verdict strings are load-bearing.
   \+ [prompts/](../prompts/)
 - See every generic file made concrete:
   [examples/laravel-react/](../examples/laravel-react/)
+
+---
+
+<div align="center">
+
+[README](../README.md) · [Playbook](../playbook/) · [Agents](../agents/) · [FAQ](faq.md) · [Getting started](getting-started.md)
+
+</div>

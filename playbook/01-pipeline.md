@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 01 of 08
+
 # 01 — The Pipeline
 
 The pipeline is the fixed path every change travels from idea to pull request.
@@ -211,3 +215,11 @@ Four checkpoints exist for crash resilience as much as legibility: a session
 that dies mid-pipeline loses at most one stage of work, and a fresh session
 can resume from the last checkpoint using the
 [pipeline state file](../templates/pipeline-state.md.template).
+
+---
+
+<div align="center">
+
+[← 00 — Overview](00-overview.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [02 — Roles →](02-roles.md)
+
+</div>

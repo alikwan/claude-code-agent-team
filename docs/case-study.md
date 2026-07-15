@@ -1,3 +1,5 @@
+[**← repository root**](../README.md) &nbsp;·&nbsp; `docs/`
+
 # Case Study: How This Pipeline Was Born
 
 *The origin story, told honestly. Identifying details about the production
@@ -126,3 +128,11 @@ original production system ran a different SPA frontend — the methodology
 carried over unchanged, which is rather the point. Quantitative claims
 (releases shipped, blocker counts) were verified against the production
 repository's history before publication.*
+
+---
+
+<div align="center">
+
+[README](../README.md) · [Playbook](../playbook/) · [Agents](../agents/) · [FAQ](faq.md) · [Getting started](getting-started.md)
+
+</div>

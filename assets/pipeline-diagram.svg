@@ -1,122 +1,94 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 400" role="img" aria-labelledby="title desc">
-  <title id="title">Claude Code multi-agent team 6-stage development pipeline diagram</title>
-  <desc id="desc">A team-lead orchestrator drives six stages: Plan, optional Design, parallel Build by backend and frontend agents, Review by QA with conditional security and migration reviewers, Integrate, Version and Document, then Release. Two human approval gates and four commit checkpoints A to D.</desc>
-  <defs>
-    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,0 L10,5 L0,10 z" fill="#64748b"/>
-    </marker>
-  </defs>
-  <style>
-    .stage { fill:#1e293b; stroke:#334155; stroke-width:1.5; rx:10; }
-    .agent { fill:#2563eb; }
-    .agentAlt { fill:#0f766e; }
-    .agentCond { fill:#7c3aed; }
-    .gate { fill:#d97757; }
-    .h { font:600 15px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#f8fafc; }
-    .t { font:500 12.5px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#f8fafc; }
-    .s { font:400 11px -apple-system,'Segoe UI',Roboto,sans-serif; fill:#cbd5e1; }
-    .cp { font:600 11px ui-monospace,'SF Mono',Menlo,monospace; fill:#fbbf24; }
-    .flow { stroke:#64748b; stroke-width:2; fill:none; marker-end:url(#arr); }
-  </style>
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="470" viewBox="0 0 1280 470" role="img" aria-label="The six-stage pipeline: Plan, Build, Review, Integrate, Version and Document, Release — with two human approval gates and four commit checkpoints">
+  
+  <rect width="1280" height="470" fill="#FFFFFF"></rect>
 
-  <rect x="0" y="0" width="1080" height="400" fill="#0f172a" rx="14"/>
+  
+  <rect x="45" y="30" width="1190" height="52" rx="12" fill="#EFF6FF" stroke="#BFDBFE"></rect>
+  <text x="640" y="55" font-size="16" font-weight="700" fill="#1D4ED8" text-anchor="middle">team-lead — the orchestrator</text>
+  <text x="640" y="73" font-size="12.5" fill="#3B82F6" text-anchor="middle">drives every stage · owns all git operations · cannot write files — must delegate · لا يلمس git أحدٌ سوى المنسٳق</text>
 
-  <!-- Orchestrator bar -->
-  <rect x="30" y="24" width="1020" height="46" rx="10" fill="#1e293b" stroke="#d97757" stroke-width="1.5"/>
-  <text x="540" y="46" text-anchor="middle" class="h">team-lead — the orchestrator (your main session)</text>
-  <text x="540" y="62" text-anchor="middle" class="s">plans · spawns every agent · owns ALL git · commits at checkpoints A–D · opens the PR</text>
-
-  <!-- Stage 1 -->
-  <g>
-    <rect x="30" y="110" width="150" height="150" class="stage" rx="10"/>
-    <text x="105" y="134" text-anchor="middle" class="h">1 · Plan</text>
-    <text x="105" y="156" text-anchor="middle" class="s">read constitution</text>
-    <text x="105" y="172" text-anchor="middle" class="s">define API contract</text>
-    <rect x="45" y="188" width="120" height="30" rx="8" class="gate"/>
-    <text x="105" y="207" text-anchor="middle" class="t">🧍 Gate 1 · plan</text>
-    <text x="105" y="240" text-anchor="middle" class="s">branch created</text>
+  
+  <g stroke="#DBEAFE" stroke-width="2" stroke-dasharray="3 4">
+    <path d="M130 82 V150"></path><path d="M334 82 V150"></path><path d="M538 82 V150"></path><path d="M742 82 V150"></path><path d="M946 82 V150"></path><path d="M1150 82 V150"></path>
   </g>
 
-  <!-- Stage 2 -->
+  
   <g>
-    <rect x="210" y="110" width="160" height="150" class="stage" rx="10"/>
-    <text x="290" y="134" text-anchor="middle" class="h">2 · Build (parallel)</text>
-    <rect x="225" y="148" width="130" height="30" rx="8" class="agent"/>
-    <text x="290" y="167" text-anchor="middle" class="t">backend-dev</text>
-    <rect x="225" y="186" width="130" height="30" rx="8" class="agent"/>
-    <text x="290" y="205" text-anchor="middle" class="t">frontend-dev</text>
-    <text x="290" y="240" text-anchor="middle" class="s">shared API contract</text>
-    <text x="290" y="286" text-anchor="middle" class="cp">📌 A · feat(scope)</text>
+    <rect x="45" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
+    <rect x="249" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
+    <rect x="453" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
+    <rect x="657" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
+    <rect x="861" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
+    <rect x="1065" y="150" width="170" height="130" rx="16" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"></rect>
   </g>
 
-  <!-- Stage 3 -->
-  <g>
-    <rect x="400" y="110" width="170" height="150" class="stage" rx="10"/>
-    <text x="485" y="134" text-anchor="middle" class="h">3 · Review</text>
-    <rect x="415" y="146" width="140" height="28" rx="8" class="agentAlt"/>
-    <text x="485" y="164" text-anchor="middle" class="t">qa-engineer 🔒</text>
-    <rect x="415" y="180" width="140" height="26" rx="8" class="agentCond"/>
-    <text x="485" y="197" text-anchor="middle" class="t">security-reviewer*</text>
-    <rect x="415" y="212" width="140" height="26" rx="8" class="agentCond"/>
-    <text x="485" y="229" text-anchor="middle" class="t">migration-reviewer*</text>
-    <text x="485" y="250" text-anchor="middle" class="s">* conditional, parallel</text>
-    <text x="485" y="286" text-anchor="middle" class="cp">📌 B · fix(scope)</text>
+  
+  <g font-size="13" font-weight="700" text-anchor="middle">
+    <circle cx="130" cy="176" r="13" fill="#2563EB"></circle><text x="130" y="180.5" fill="#FFFFFF">1</text>
+    <circle cx="334" cy="176" r="13" fill="#2563EB"></circle><text x="334" y="180.5" fill="#FFFFFF">2</text>
+    <circle cx="538" cy="176" r="13" fill="#2563EB"></circle><text x="538" y="180.5" fill="#FFFFFF">3</text>
+    <circle cx="742" cy="176" r="13" fill="#2563EB"></circle><text x="742" y="180.5" fill="#FFFFFF">4</text>
+    <circle cx="946" cy="176" r="13" fill="#2563EB"></circle><text x="946" y="180.5" fill="#FFFFFF">5</text>
+    <circle cx="1150" cy="176" r="13" fill="#2563EB"></circle><text x="1150" y="180.5" fill="#FFFFFF">6</text>
   </g>
 
-  <!-- Stage 4 -->
-  <g>
-    <rect x="600" y="110" width="150" height="150" class="stage" rx="10"/>
-    <text x="675" y="134" text-anchor="middle" class="h">4 · Integrate</text>
-    <rect x="615" y="148" width="120" height="30" rx="8" class="agent"/>
-    <text x="675" y="167" text-anchor="middle" class="t">integration</text>
-    <text x="675" y="196" text-anchor="middle" class="s">phantom checks</text>
-    <text x="675" y="212" text-anchor="middle" class="s">connect, not rebuild</text>
-    <text x="675" y="228" text-anchor="middle" class="s">Δ → QA re-check</text>
-    <text x="675" y="286" text-anchor="middle" class="cp">📌 C · chore(scope)</text>
+  
+  <g text-anchor="middle">
+    <text x="130" y="218" font-size="19" font-weight="700" fill="#0F172A">Plan</text>
+    <text x="334" y="218" font-size="19" font-weight="700" fill="#0F172A">Build</text>
+    <text x="538" y="218" font-size="19" font-weight="700" fill="#0F172A">Review</text>
+    <text x="742" y="218" font-size="19" font-weight="700" fill="#0F172A">Integrate</text>
+    <text x="946" y="218" font-size="19" font-weight="700" fill="#0F172A">Version &amp; Docs</text>
+    <text x="1150" y="218" font-size="19" font-weight="700" fill="#0F172A">Release</text>
+    <text x="130" y="238" font-size="13" fill="#64748B">التخطيط</text>
+    <text x="334" y="238" font-size="13" fill="#64748B">البناء</text>
+    <text x="538" y="238" font-size="13" fill="#64748B">المراجعة</text>
+    <text x="742" y="238" font-size="13" fill="#64748B">التكامل</text>
+    <text x="946" y="238" font-size="13" fill="#64748B">الإصدار والتوثيق</text>
+    <text x="1150" y="238" font-size="13" fill="#64748B">التسليم</text>
+    <text x="130" y="262" font-size="11.5" fill="#94A3B8">team-lead</text>
+    <text x="334" y="262" font-size="11.5" fill="#94A3B8">backend ∥ frontend</text>
+    <text x="538" y="262" font-size="11.5" fill="#94A3B8">qa + conditional reviews</text>
+    <text x="742" y="262" font-size="11.5" fill="#94A3B8">integration-agent</text>
+    <text x="946" y="262" font-size="11.5" fill="#94A3B8">documentation-agent</text>
+    <text x="1150" y="262" font-size="11.5" fill="#94A3B8">team-lead → PR</text>
   </g>
 
-  <!-- Stage 5 -->
-  <g>
-    <rect x="780" y="110" width="160" height="150" class="stage" rx="10"/>
-    <text x="860" y="134" text-anchor="middle" class="h">5 · Version + Docs</text>
-    <rect x="795" y="146" width="130" height="28" rx="8" class="gate"/>
-    <text x="860" y="164" text-anchor="middle" class="t">🧍 Gate 2: version</text>
-    <rect x="795" y="182" width="130" height="28" rx="8" class="agent"/>
-    <text x="860" y="200" text-anchor="middle" class="t">documentation</text>
-    <text x="860" y="228" text-anchor="middle" class="s">CHANGELOG always</text>
-    <text x="860" y="286" text-anchor="middle" class="cp">📌 D · docs + bump</text>
+  
+  <g stroke="#94A3B8" stroke-width="2" fill="none">
+    <path d="M215 215 H243"></path><path d="M419 215 H447"></path><path d="M623 215 H651"></path><path d="M827 215 H855"></path><path d="M1031 215 H1059"></path>
+  </g>
+  <g fill="#94A3B8">
+    <path d="M241 209 L251 215 L241 221 Z"></path><path d="M445 209 L455 215 L445 221 Z"></path><path d="M649 209 L659 215 L649 221 Z"></path><path d="M853 209 L863 215 L853 221 Z"></path><path d="M1057 209 L1067 215 L1057 221 Z"></path>
   </g>
 
-  <!-- Stage 6 -->
+  
   <g>
-    <rect x="970" y="110" width="80" height="150" class="stage" rx="10"/>
-    <text x="1010" y="134" text-anchor="middle" class="h">6</text>
-    <text x="1010" y="152" text-anchor="middle" class="h">Release</text>
-    <text x="1010" y="186" text-anchor="middle" class="s">push</text>
-    <text x="1010" y="202" text-anchor="middle" class="s">open PR</text>
+    <rect x="221" y="204" width="22" height="22" rx="3" transform="rotate(45 232 215)" fill="#F97316"></rect>
+    <text x="232" y="220" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">G1</text>
+    <rect x="1033" y="204" width="22" height="22" rx="3" transform="rotate(45 1044 215)" fill="#F97316"></rect>
+    <text x="1044" y="220" font-size="11" font-weight="700" fill="#FFFFFF" text-anchor="middle">G2</text>
   </g>
 
-  <!-- flow arrows -->
-  <path class="flow" d="M180,185 L206,185"/>
-  <path class="flow" d="M370,185 L396,185"/>
-  <path class="flow" d="M570,185 L596,185"/>
-  <path class="flow" d="M750,185 L776,185"/>
-  <path class="flow" d="M940,185 L966,185"/>
+  
+  <path d="M130 330 H1150" stroke="#CBD5E1" stroke-width="2"></path>
+  <g stroke="#E2E8F0" stroke-width="1.5" stroke-dasharray="3 4">
+    <path d="M334 280 V318"></path><path d="M538 280 V318"></path><path d="M742 280 V318"></path><path d="M946 280 V318"></path>
+  </g>
+  <g text-anchor="middle" font-weight="700" font-size="12">
+    <circle cx="334" cy="330" r="12" fill="#2563EB"></circle><text x="334" y="334.5" fill="#FFFFFF">A</text>
+    <circle cx="538" cy="330" r="12" fill="#2563EB"></circle><text x="538" y="334.5" fill="#FFFFFF">B</text>
+    <circle cx="742" cy="330" r="12" fill="#2563EB"></circle><text x="742" y="334.5" fill="#FFFFFF">C</text>
+    <circle cx="946" cy="330" r="12" fill="#2563EB"></circle><text x="946" y="334.5" fill="#FFFFFF">D</text>
+  </g>
+  <text x="130" y="365" font-size="12.5" fill="#64748B">git history — four commit checkpoints: every stage leaves inspectable history</text>
 
-  <!-- QA reject loop -->
-  <path class="flow" d="M485,260 C485,330 290,330 290,264" stroke-dasharray="5 4"/>
-  <text x="388" y="322" text-anchor="middle" class="s">QA REJECTED ❌ → fix → re-review</text>
-
-  <!-- legend -->
-  <g>
-    <rect x="30" y="352" width="14" height="14" rx="4" class="agent"/>
-    <text x="52" y="364" class="s">builder / connector (read-write)</text>
-    <rect x="270" y="352" width="14" height="14" rx="4" class="agentAlt"/>
-    <text x="292" y="364" class="s">judge (read-only)</text>
-    <rect x="430" y="352" width="14" height="14" rx="4" class="agentCond"/>
-    <text x="452" y="364" class="s">conditional reviewer (cheap model)</text>
-    <rect x="690" y="352" width="14" height="14" rx="4" class="gate"/>
-    <text x="712" y="364" class="s">human approval gate</text>
-    <text x="880" y="364" class="cp">📌 commit checkpoint</text>
+  
+  <g font-size="13" fill="#475569">
+    <rect x="49" y="410" width="15" height="15" rx="2" transform="rotate(45 56.5 417.5)" fill="#F97316"></rect>
+    <text x="78" y="422">human approval gate — G1: you approve the plan · G2: you approve the version</text>
+    <circle cx="656" cy="417" r="8" fill="#2563EB"></circle>
+    <text x="676" y="422">commit checkpoint (A–D)</text>
+    <text x="900" y="422" fill="#94A3B8">hotfix lane: stages 1 → 2 → 3 only, one builder</text>
   </g>
 </svg>

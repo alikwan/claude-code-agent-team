@@ -12,6 +12,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.1.1] — 2026-07-14
+
+### Changed
+
+- The source production project is now fully unnamed throughout the
+  repository (case study, its Arabic twin, and the example's provenance
+  note), and its git history was rewritten to match — the experience
+  transfers; the project's identity does not.
+- Increased the worked example's fictional distance from its origin:
+  domain strings that were byte-identical to the source project (doc
+  filenames, a module path, service names, a setting key, table names)
+  were renamed to fiction-preserving equivalents.
+
+### Fixed
+
+- SVG assets carry explicit intrinsic `width`/`height` again — without
+  them, GitHub READMEs collapse the images (icons rendered at 15px).
+- Component icons moved inline into the asset table's text cells — a
+  dedicated icon column gets crushed when GitHub shrinks an overflowing
+  table.
+
 ## [0.1.0] — 2026-07-13
 
 ### Added

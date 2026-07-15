@@ -1,3 +1,5 @@
+[**← repository root**](../README.md) &nbsp;·&nbsp; `docs/`
+
 # Placeholder Registry
 
 Every generic file in this repository (`agents/`, `prompts/`, `templates/`,
@@ -83,3 +85,11 @@ Two rules keep this system honest (both enforced by CI):
 
 That final grep is the same consistency gate this repository runs on itself in
 CI — adopt it as a habit.
+
+---
+
+<div align="center">
+
+[README](../README.md) · [Playbook](../playbook/) · [Agents](../agents/) · [FAQ](faq.md) · [Getting started](getting-started.md)
+
+</div>

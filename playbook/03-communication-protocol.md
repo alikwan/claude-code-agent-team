@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 03 of 08
+
 # 03 — Communication Protocol
 
 The rules that let ten independent contexts behave like one team. This chapter
@@ -172,3 +176,11 @@ prose alone has already failed us once
   `{{TEST_DB_NAME}}`.
 - No agent deletes branches or force-pushes.
 - No agent writes secrets into memory files, docs, or commit messages.
+
+---
+
+<div align="center">
+
+[← 02 — Roles](02-roles.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [04 — Bug Patterns →](04-bug-patterns.md)
+
+</div>

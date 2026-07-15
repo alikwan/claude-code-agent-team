@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="127" height="20" viewBox="0 0 127 20" role="img" aria-label="pipeline: 6 stages">
+  <title>pipeline: 6 stages</title>
+  <defs>
+    <linearGradient id="g" x2="0" y2="100%"><stop offset="0" stop-color="#fff" stop-opacity=".12"></stop><stop offset="1" stop-opacity=".12"></stop></linearGradient>
+    <clipPath id="r"><rect width="127" height="20" rx="4" fill="#fff"></rect></clipPath>
+  </defs>
+  <g clip-path="url(#r)">
+    <rect width="59" height="20" fill="#475569"></rect>
+    <rect x="59" width="68" height="20" fill="#2563EB"></rect>
+    <rect width="127" height="20" fill="url(#g)"></rect>
+  </g>
+  <g fill="#fff" text-anchor="middle" font-family="Segoe UI, Verdana, Geneva, DejaVu Sans, sans-serif" font-size="11">
+    <text x="29.5" y="14.5" fill="#000" fill-opacity=".25">pipeline</text>
+    <text x="29.5" y="13.5">pipeline</text>
+    <text x="93" y="14.5" fill="#000" fill-opacity=".25">6 stages</text>
+    <text x="93" y="13.5">6 stages</text>
+  </g>
+</svg>

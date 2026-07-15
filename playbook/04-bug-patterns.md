@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 04 of 08
+
 # 04 — The Bug-Pattern Library
 
 Five failure modes that repeat in AI-assisted (and, honestly, human) development.
@@ -274,3 +278,11 @@ that keeps a library honest:
 A pattern library that only grows in someone's head protects exactly one
 reviewer. Written down with a detection recipe, it protects every session that
 ever runs.
+
+---
+
+<div align="center">
+
+[← 03 — Communication Protocol](03-communication-protocol.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [05 — Phantom Checks →](05-phantom-checks.md)
+
+</div>

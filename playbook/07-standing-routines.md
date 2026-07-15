@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 07 of 08
+
 # 07 — Standing Routines
 
 The pipeline is a *per-change* gate: it judges one diff, on one branch, at one
@@ -126,3 +130,11 @@ library"): add it to the pattern library and the relevant agent templates so
 the pipeline starts catching it per-change — then the routine's job shrinks
 back to what only it can see. A standing routine whose finding rate trends
 toward zero is not failing; it is succeeding.
+
+---
+
+<div align="center">
+
+[← 06 — The Memory System](06-memory-system.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [08 — Field Notes →](08-field-notes.md)
+
+</div>

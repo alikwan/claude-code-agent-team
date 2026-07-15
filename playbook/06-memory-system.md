@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 06 of 08
+
 # 06 — The Memory System
 
 Sub-agents are stateless: every spawn is a blank slate that knows only its
@@ -133,3 +137,11 @@ Monthly is a good default; after any heavy multi-PR stretch, sooner.
 Seed each agent's memory with an empty template on day one. An agent that
 finds a memory file — even an empty one — learns the habit of maintaining it;
 an agent that finds nothing writes nothing.
+
+---
+
+<div align="center">
+
+[← 05 — Phantom Checks](05-phantom-checks.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [07 — Standing Routines →](07-standing-routines.md)
+
+</div>

@@ -1,14 +1,20 @@
+<img src="../assets/icons/playbook.svg" width="56" height="56" alt="">
+
 # The Playbook
 
-The methodology itself, in nine chapters. This is the *why and how* — the
-copy-paste artifacts live in [`agents/`](../agents), [`prompts/`](../prompts),
-and [`templates/`](../templates).
+[**← repository root**](../README.md) &nbsp;·&nbsp; `playbook/` — the methodology itself, in nine chapters
 
-**New here?** Read in this order: the
-[case study](../docs/case-study.md) (why this exists) → chapter
-[01 — the pipeline](01-pipeline.md) (the core mechanism) → the
-[getting-started guide](../docs/getting-started.md) (do it). Everything else
-is reference.
+---
+
+This is the *why and how* — the copy-paste artifacts live in [`agents/`](../agents),
+[`prompts/`](../prompts), and [`templates/`](../templates).
+
+> [!TIP]
+> **New here?** Read in this order: the [case study](../docs/case-study.md) (why this exists) →
+> chapter [01 — the pipeline](01-pipeline.md) (the core mechanism) → the
+> [getting-started guide](../docs/getting-started.md) (do it). Everything else is reference.
+
+## The nine chapters
 
 | # | Chapter | One line |
 | :--- | :--- | :--- |
@@ -22,7 +28,15 @@ is reference.
 | 07 | [Standing Routines](07-standing-routines.md) | Scheduled reviews that catch what per-change gates cannot |
 | 08 | [Field Notes](08-field-notes.md) | Hard-won operational lessons, stated as symptom → diagnosis → rule |
 
-Chapters 00–03 define canonical vocabulary (stage names, checkpoint letters,
-verdict strings) used verbatim by every agent template. If you rename anything,
-rename it everywhere — the verdict strings are machine-parsed contracts, not
-prose.
+> [!IMPORTANT]
+> Chapters 00–03 define canonical vocabulary (stage names, checkpoint letters, verdict strings)
+> used verbatim by every agent template. If you rename anything, rename it everywhere — the
+> verdict strings are machine-parsed contracts, not prose.
+
+---
+
+<div align="center">
+
+[README](../README.md) · [Getting started](../docs/getting-started.md) · [Agents](../agents/) · [Prompts](../prompts/) · [Templates](../templates/) · [Examples](../examples/)
+
+</div>

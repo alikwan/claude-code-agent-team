@@ -1,3 +1,5 @@
+[**← العودة إلى الصفحة الرئيسية**](../../README.ar.md) &nbsp;·&nbsp; `docs/ar/`
+
 [🇬🇧 Read this guide in English — getting-started.md](../getting-started.md)
 
 <!-- Translated from docs/getting-started.md @ v0.1.0 (2026-07-13). English is canonical — لا تُحرّر هذا الملف دون مزامنة الأصل الإنجليزي -->
@@ -100,5 +102,13 @@ done
 - قلّص الفريق لمشروع صغير (3 وكلاء تكفي): [playbook/02 — Roles](../../playbook/02-roles.md) (EN)
 - جدوِل الروتينات الدورية: [playbook/07](../../playbook/07-standing-routines.md) (EN) + [prompts/](../../prompts/) (EN)
 - شاهد كل ملف عام وقد جُسِّد واقعيًا: [examples/laravel-react/](../../examples/laravel-react/) (EN)
+
+</div>
+
+---
+
+<div align="center">
+
+[الرئيسية بالعربية](../../README.ar.md) · [دليل البدء](getting-started.ar.md) · [نظرة عامة على المنهجية](playbook-overview.ar.md) · [دراسة الحالة](case-study.ar.md)
 
 </div>

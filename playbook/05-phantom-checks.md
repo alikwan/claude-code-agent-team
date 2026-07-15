@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 05 of 08
+
 # 05 — The Phantom Checks (A–H)
 
 Eight mechanical checks that catch features which are *defined but not
@@ -200,3 +204,11 @@ QA does not duplicate these checks in Stage 3 — it owns the diff-correctness
 patterns instead, and each agent's template points at the other's scope. The
 codebase-wide re-run belongs to the standing sweep
 ([chapter 07](07-standing-routines.md)).
+
+---
+
+<div align="center">
+
+[← 04 — Bug Patterns](04-bug-patterns.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [06 — The Memory System →](06-memory-system.md)
+
+</div>

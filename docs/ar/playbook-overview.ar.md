@@ -1,3 +1,5 @@
+[**← العودة إلى الصفحة الرئيسية**](../../README.ar.md) &nbsp;·&nbsp; `docs/ar/`
+
 [🇬🇧 The full playbook in English — playbook/](../../playbook/README.md)
 
 <!-- Translated from playbook/00-03 (full) + 04-08 (summaries) @ v0.1.0 (2026-07-13). English is canonical — لا تُحرّر هذا الملف دون مزامنة الأصل الإنجليزي -->
@@ -270,5 +272,13 @@
 
 - **التجهيز العملي خطوة بخطوة بالعربية:** [دليل البدء](getting-started.ar.md)
 - **الرواية الصادقة الكاملة — كيف وُلدت المنهجية وما الذي لا يعمل بعد:** [دراسة الحالة](case-study.ar.md)
+
+</div>
+
+---
+
+<div align="center">
+
+[الرئيسية بالعربية](../../README.ar.md) · [دليل البدء](getting-started.ar.md) · [نظرة عامة على المنهجية](playbook-overview.ar.md) · [دراسة الحالة](case-study.ar.md)
 
 </div>

@@ -1,3 +1,7 @@
+<img src="../assets/icons/playbook.svg" width="40" height="40" alt="">
+
+[**← playbook index**](README.md) &nbsp;·&nbsp; chapter 02 of 08
+
 # 02 — Roles: The Nine Agents
 
 Each agent is a Markdown file with YAML frontmatter, installed in your
@@ -140,3 +144,11 @@ fixing them. If that's your situation, add the
 step is exactly where automation stalls, so the human-operated release is the
 documented design, not a gap; a dependency-update agent (it's the hotfix lane
 plus your CI); a second PR-review agent (that's CI's job).
+
+---
+
+<div align="center">
+
+[← 01 — The Pipeline](01-pipeline.md) &nbsp;·&nbsp; [Playbook index](README.md) &nbsp;·&nbsp; [03 — Communication Protocol →](03-communication-protocol.md)
+
+</div>

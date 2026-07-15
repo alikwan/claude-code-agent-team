@@ -1,3 +1,5 @@
+[**← repository root**](../README.md) &nbsp;·&nbsp; `docs/`
+
 # FAQ
 
 ## Does this only work with Claude Code?
@@ -117,3 +119,11 @@ version-controlled and committed alongside code. Governance is enforced
 
 **Don't open a public issue.** Follow [SECURITY.md](../SECURITY.md) — private
 vulnerability reporting, highest-priority handling.
+
+---
+
+<div align="center">
+
+[README](../README.md) · [Playbook](../playbook/) · [Agents](../agents/) · [FAQ](faq.md) · [Getting started](getting-started.md)
+
+</div>

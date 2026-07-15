@@ -65,6 +65,8 @@ Arabic.
 > team — and you want AI-built changes to arrive planned, reviewed, integrated, documented, and
 > committed with discipline instead of sprayed into your working tree.
 
+<!-- -->
+
 > [!CAUTION]
 > **Not for you if:** you want a fully autonomous agent swarm (look at CrewAI / AutoGen —
 > different shelf), you use a non-Claude-Code toolchain (the *method* transfers, the agent-file

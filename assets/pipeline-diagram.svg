@@ -5,7 +5,7 @@
   
   <rect x="45" y="30" width="1190" height="52" rx="12" fill="#EFF6FF" stroke="#BFDBFE"></rect>
   <text x="640" y="55" font-size="16" font-weight="700" fill="#1D4ED8" text-anchor="middle">team-lead — the orchestrator</text>
-  <text x="640" y="73" font-size="12.5" fill="#3B82F6" text-anchor="middle">drives every stage · owns all git operations · cannot write files — must delegate · لا يلمس git أحدٌ سوى المنسٳق</text>
+  <text x="640" y="73" font-size="12.5" fill="#3B82F6" text-anchor="middle">drives every stage · owns all git operations · cannot write files — must delegate · لا يلمس git أحدٌ سوى المنسّق</text>
 
   
   <g stroke="#DBEAFE" stroke-width="2" stroke-dasharray="3 4">

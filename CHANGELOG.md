@@ -32,6 +32,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `agents/README.md` gained a full team table (role, write access, model tier).
 - Docs pages (`docs/`, `playbook/` chapters) carry breadcrumb headers and
   prev/next navigation footers.
+- README (EN + AR) opens with a positioning line: you don't need to be a
+  specialist to build real software — you need to direct a team that is. The
+  stat line reads "1 person" rather than "1 developer".
+
+### Fixed
+
+- Arabic typography in the visual assets: a corrupted combining mark
+  (U+0673 in place of the shadda) was garbling four words across the hero
+  banner, pipeline diagram, and social-preview card. Corrected.
 
 ## [0.1.1] — 2026-07-14
 

@@ -26,11 +26,14 @@ shipped **200+ releases** this way.
 
 <img src="assets/hero-banner.svg" width="100%" alt="Claude Code Agent Team — nine specialized sub-agents driving a six-stage delivery pipeline with two human approval gates, documented in English and Arabic">
 
-**200+ production releases &nbsp;·&nbsp; 1 developer &nbsp;·&nbsp; 9 agents &nbsp;·&nbsp; a live Arabic-first platform**
+**200+ production releases &nbsp;·&nbsp; 1 person &nbsp;·&nbsp; 9 agents &nbsp;·&nbsp; a live Arabic-first platform**
 
 </div>
 
 ---
+
+> **You don't need to be a specialist to build real software — you need to direct a team that is.**
+> This playbook is that team, and the discipline that keeps it honest.
 
 A production-proven playbook for multi-agent software development in Claude Code: 9 specialized
 sub-agents working as one coordinated AI dev team. A team-lead orchestrator drives backend,
